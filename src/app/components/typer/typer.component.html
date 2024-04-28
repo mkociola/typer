@@ -1,0 +1,32 @@
+<div class="flex flex-col justify-center gap-y-12">
+  <div>
+    @for (character of sentence; track lastCorrectCharacterIndex; let idx =
+    $index) {
+    <span
+      class="text-5xl font-bold"
+      [ngClass]="{ '[&>*]:border-b-2': idx === input.selectionStart }"
+    >
+      @if (idx < lastCorrectCharacterIndex) {
+      <span class="green">{{ character }}</span>
+      } @else if (idx == lastCorrectCharacterIndex) { @if (input.value.length >
+      lastCorrectCharacterIndex) {
+      <span class="red">{{ character }}</span>
+      } @else {
+      <span class="blue">{{ character }}</span>
+      } } @else { @if(input.value.length > lastCorrectCharacterIndex && idx >
+      lastCorrectCharacterIndex && idx < input.value.length) {
+      <span class="red">{{ character }}</span>
+      } @else {
+      <span>{{ character }}</span>
+      } }
+    </span>
+    }
+  </div>
+
+  <input
+    #input
+    type="text"
+    class="opacity-0"
+    (input)="onInputChange(input.value)"
+  />
+</div>
