@@ -5,7 +5,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { RandomParagraphService } from '../../api/random-paragraph.service';
+import { RandomTextService } from '../../api/random-text.service';
 import { NgClass } from '@angular/common';
 import { WordsPerMinuteService } from '../../services/words-per-minute.service';
 
@@ -17,7 +17,7 @@ import { WordsPerMinuteService } from '../../services/words-per-minute.service';
   styleUrl: './typer.component.scss',
 })
 export class TyperComponent implements AfterViewInit {
-  private _randomParagraphService = inject(RandomParagraphService);
+  private _randomTextService = inject(RandomTextService);
   private _wpmService = inject(WordsPerMinuteService);
   protected sentence!: string;
   protected lastCorrectCharacterIndex: number = 0;
@@ -61,7 +61,7 @@ export class TyperComponent implements AfterViewInit {
   private fetchSentence(): void {
     // reddit says that Observables returned by the
     // HttpClient are automatically unsubscribed
-    this._randomParagraphService
+    this._randomTextService
       .getRandomSentences()
       .subscribe((data) => (this.sentence = data));
   }

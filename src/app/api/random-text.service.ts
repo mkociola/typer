@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class RandomParagraphService {
+export class RandomTextService {
   private readonly _http = inject(HttpClient);
   private readonly _url = 'http://metaphorpsum.com';
 
