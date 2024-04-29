@@ -1,4 +1,7 @@
-<div class="flex flex-col justify-center gap-y-12">
+<div class="flex flex-col justify-center items-center gap-y-12">
+  @if(loading) {
+  <span class="loading loading-spinner loading-lg"></span>
+  } @else {
   <div>
     @for (character of sentence; track lastCorrectCharacterIndex; let idx =
     $index) {
@@ -22,6 +25,7 @@
     </span>
     }
   </div>
+  }
 
   <input
     #input

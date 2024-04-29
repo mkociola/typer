@@ -21,6 +21,7 @@ export class TyperComponent implements AfterViewInit {
   private _wpmService = inject(WordsPerMinuteService);
   protected sentence!: string;
   protected lastCorrectCharacterIndex: number = 0;
+  protected loading: boolean = true;
 
   @ViewChild('input') private _input!: ElementRef;
 
@@ -61,8 +62,10 @@ export class TyperComponent implements AfterViewInit {
   private fetchSentence(): void {
     // reddit says that Observables returned by the
     // HttpClient are automatically unsubscribed
-    this._randomTextService
-      .getRandomSentences()
-      .subscribe((data) => (this.sentence = data));
+    this.loading = true;
+    this._randomTextService.getRandomSentences().subscribe((data) => {
+      this.sentence = data;
+      this.loading = false;
+    });
   }
 }
