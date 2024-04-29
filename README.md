@@ -8,5 +8,5 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Hosting
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/99ccbe9c-bea1-473f-a886-475a5ea0c7cb/deploy-status)](https://app.netlify.com/sites/typeer/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/99ccbe9c-bea1-473f-a886-475a5ea0c7cb/deploy-status)](https://app.netlify.com/sites/typeer/deploys)  
 This application is hosted with Netlify at [Typeer](https://typeer.netlify.app)
