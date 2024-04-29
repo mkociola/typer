@@ -1,0 +1,12 @@
+h1 {
+  @apply text-7xl font-bold text-primary
+  mb-4
+}
+
+p {
+  @apply text-xl mb-12
+}
+
+#menu {
+  @apply flex flex-row gap-x-8
+}
