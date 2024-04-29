@@ -64,9 +64,16 @@ export class TyperComponent implements AfterViewInit {
     // reddit says that Observables returned by the
     // HttpClient are automatically unsubscribed
     this.loading = true;
-    this._randomTextService.getRandomSentences().subscribe((data) => {
-      this.sentence = data;
-      this.loading = false;
-    });
+    this._randomTextService.getRandomSentences().subscribe(
+      (data) => {
+        this.sentence = data;
+        this.loading = false;
+      },
+      (error) => {
+        alert(
+          'There was an error while fetching sentences. See the console for more information'
+        );
+      }
+    );
   }
 }
