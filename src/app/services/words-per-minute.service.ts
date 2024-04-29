@@ -11,7 +11,7 @@ import { Observable, interval, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class WordsPerMinuteService implements OnInit {
+export class WordsPerMinuteService {
   private _startTime!: number;
   private _words: WritableSignal<number> = signal(0);
 
@@ -22,10 +22,6 @@ export class WordsPerMinuteService implements OnInit {
   wpm: Signal<number> = computed(() =>
     Math.round(this._words() / ((Date.now() - this._startTime) / (1000 * 60)))
   );
-
-  ngOnInit(): void {
-    this.reset();
-  }
 
   reset(): void {
     this._startTime = Date.now();

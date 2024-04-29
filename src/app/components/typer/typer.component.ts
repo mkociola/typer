@@ -28,6 +28,7 @@ export class TyperComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.fetchSentence();
     this._input.nativeElement.focus();
+    this._wpmService.reset();
   }
 
   protected onInputChange(input: string): void {
