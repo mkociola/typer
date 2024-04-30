@@ -3,7 +3,7 @@
   <span class="loading loading-spinner loading-lg"></span>
   } @else {
   <div>
-    @for (character of sentence; track lastCorrectCharacterIndex; let idx =
+    @for (character of quote.content; track lastCorrectCharacterIndex; let idx =
     $index) {
     <span
       class="text-5xl font-bold"

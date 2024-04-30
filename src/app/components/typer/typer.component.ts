@@ -5,9 +5,10 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { RandomTextService } from '../../api/random-text.service';
+import { RandomQuoteService } from '../../api/random-quote.service';
 import { NgClass } from '@angular/common';
 import { WordsPerMinuteService } from '../../services/words-per-minute.service';
+import { Quote } from '../../interfaces/quote';
 
 @Component({
   selector: 'app-typer',
@@ -17,9 +18,9 @@ import { WordsPerMinuteService } from '../../services/words-per-minute.service';
   styleUrl: './typer.component.scss',
 })
 export class TyperComponent implements AfterViewInit {
-  private _randomTextService = inject(RandomTextService);
+  private _randomTextService = inject(RandomQuoteService);
   private _wpmService = inject(WordsPerMinuteService);
-  protected sentence!: string;
+  protected quote!: Quote;
   protected lastCorrectCharacterIndex: number = 0;
   protected loading: boolean = true;
 
@@ -33,8 +34,8 @@ export class TyperComponent implements AfterViewInit {
 
   protected onInputChange(input: string): void {
     // iterate to find lastCorrectCharacterIndex
-    for (let i = 0; i < this.sentence.length; i++) {
-      if (this.sentence.charAt(i) === input.charAt(i)) {
+    for (let i = 0; i < this.quote.content.length; i++) {
+      if (this.quote.content.charAt(i) === input.charAt(i)) {
         this.lastCorrectCharacterIndex = i + 1;
       } else {
         this.lastCorrectCharacterIndex = i;
@@ -43,7 +44,7 @@ export class TyperComponent implements AfterViewInit {
     }
 
     // check for completion
-    if (this.sentence === input) {
+    if (this.quote.content === input) {
       this.handleWin();
     }
   }
@@ -51,7 +52,7 @@ export class TyperComponent implements AfterViewInit {
   private handleWin(): void {
     // add finished words to the
     // WordsPerMinute service
-    let wordsNum = this.sentence.split(' ').length;
+    let wordsNum = this.quote.content.split(' ').length;
     this._wpmService.addWords(wordsNum);
 
     // reset values
@@ -64,16 +65,16 @@ export class TyperComponent implements AfterViewInit {
     // reddit says that Observables returned by the
     // HttpClient are automatically unsubscribed
     this.loading = true;
-    this._randomTextService.getRandomSentences().subscribe(
-      (data) => {
-        this.sentence = data;
+    this._randomTextService.getRandomQuotes().subscribe({
+      next: (data) => {
+        this.quote = data[0];
         this.loading = false;
       },
-      (error) => {
+      error: (e) => {
         alert(
           'There was an error while fetching sentences. See the console for more information'
         );
-      }
-    );
+      },
+    });
   }
 }
