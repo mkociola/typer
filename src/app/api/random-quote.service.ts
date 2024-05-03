@@ -7,11 +7,11 @@ import { Quote } from '../interfaces/quote';
   providedIn: 'root',
 })
 export class RandomQuoteService {
-  private readonly _http = inject(HttpClient);
-  private readonly _url = 'https://api.quotable.io';
+  private readonly http = inject(HttpClient);
+  private readonly url = 'https://api.quotable.io';
 
   getRandomQuotes(quotesNumber: number = 1): Observable<Quote[]> {
-    const url = `${this._url}/quotes/random?limit=${quotesNumber}`;
-    return this._http.get<Quote[]>(url);
+    const url = `${this.url}/quotes/random?limit=${quotesNumber}`;
+    return this.http.get<Quote[]>(url);
   }
 }

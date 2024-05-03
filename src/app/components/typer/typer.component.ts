@@ -19,18 +19,18 @@ import { ColorByIndexPipe } from '../../pipes/color-by-index.pipe';
   styleUrl: './typer.component.scss',
 })
 export class TyperComponent implements AfterViewInit {
-  private _randomTextService = inject(RandomQuoteService);
-  private _wpmService = inject(WordsPerMinuteService);
+  private randomTextService = inject(RandomQuoteService);
+  private wpmService = inject(WordsPerMinuteService);
   protected quote!: Quote;
   protected lastCorrectCharacterIndex: number = 0;
   protected loading: boolean = true;
 
-  @ViewChild('input') private _input!: ElementRef;
+  @ViewChild('input') private input!: ElementRef;
 
   ngAfterViewInit(): void {
     this.fetchSentence();
-    this._input.nativeElement.focus();
-    this._wpmService.reset();
+    this.input.nativeElement.focus();
+    this.wpmService.reset();
   }
 
   protected onInputChange(input: string): void {
@@ -54,10 +54,10 @@ export class TyperComponent implements AfterViewInit {
     // add finished words to the
     // WordsPerMinute service
     let wordsNum = this.quote.content.split(' ').length;
-    this._wpmService.addWords(wordsNum);
+    this.wpmService.addWords(wordsNum);
 
     // reset values
-    this._input.nativeElement.value = '';
+    this.input.nativeElement.value = '';
     this.lastCorrectCharacterIndex = 0;
     this.fetchSentence();
   }
@@ -66,7 +66,7 @@ export class TyperComponent implements AfterViewInit {
     // reddit says that Observables returned by the
     // HttpClient are automatically unsubscribed
     this.loading = true;
-    this._randomTextService.getRandomQuotes().subscribe({
+    this.randomTextService.getRandomQuotes().subscribe({
       next: (data) => {
         this.quote = data[0];
         this.loading = false;
