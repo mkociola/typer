@@ -3,25 +3,18 @@
   <span class="loading loading-spinner loading-lg"></span>
   } @else {
   <div>
-    @for (character of quote.content; track lastCorrectCharacterIndex; let idx =
-    $index) {
+    @for (character of quote.content; track lastCorrectCharacterIndex; let index
+    = $index) {
     <span
       class="text-5xl font-bold"
-      [ngClass]="{ '[&>*]:border-b-2': idx === input.selectionStart }"
+      [ngClass]="{ '[&>*]:border-b-2': index === input.selectionStart }"
     >
-      @if (idx < lastCorrectCharacterIndex) {
-      <span class="green">{{ character }}</span>
-      } @else if (idx == lastCorrectCharacterIndex) { @if (input.value.length >
-      lastCorrectCharacterIndex) {
-      <span class="red">{{ character }}</span>
-      } @else {
-      <span class="blue">{{ character }}</span>
-      } } @else { @if(input.value.length > lastCorrectCharacterIndex && idx >
-      lastCorrectCharacterIndex && idx < input.value.length) {
-      <span class="red">{{ character }}</span>
-      } @else {
-      <span>{{ character }}</span>
-      } }
+      <span
+        [ngClass]="
+          index | colorByIndex : lastCorrectCharacterIndex : input.value.length
+        "
+        >{{ character }}</span
+      >
     </span>
     }
   </div>

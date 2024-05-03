@@ -9,11 +9,12 @@ import { RandomQuoteService } from '../../api/random-quote.service';
 import { NgClass } from '@angular/common';
 import { WordsPerMinuteService } from '../../services/words-per-minute.service';
 import { Quote } from '../../interfaces/quote';
+import { ColorByIndexPipe } from '../../pipes/color-by-index.pipe';
 
 @Component({
   selector: 'app-typer',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, ColorByIndexPipe],
   templateUrl: './typer.component.html',
   styleUrl: './typer.component.scss',
 })
